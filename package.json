@@ -8,12 +8,15 @@
     "start": "node server/index.js",
     "build": "cd client && npm install && npm run build"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "imagemin": "^8.0.0"
+    "imagemin": "^8.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2"
   },
   "engines": {
     "node": "v14.16.0"

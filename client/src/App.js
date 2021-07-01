@@ -1,34 +1,38 @@
-import './App.scss'
-import UploadBox from './components/UploadBox'
-import Tasks from './components/Tasks'
-import DownloadAll from './components/DownloadAll'
-import React from "react";
+
+import UploadBox from './components/UploadBox';
+import Tasks from './components/Tasks';
+import DownloadAll from './components/DownloadAll';
 import { useState } from "react";
+
+import imagemin from 'imagemin';
+import imageminJpegtran from 'imagemin-jpegtran';
+import imageminPngquant from 'imagemin-pngquant';
+
+
+import './App.scss'
 function App() {
-
-  const [data, setData] = React.useState(null);
   const [tasks,setTasks] = useState([])
-
-  const handleChange = (tasks)=>{
-    setTasks(tasks); 
+  const handleChange = async (tasks)=>{
+      setTasks(tasks); 
+    const files = await imagemin(['images/*.{jpg,png}'], {
+        destination: 'build/images',
+      plugins: [
+        imageminJpegtran(),
+        imageminPngquant({
+          quality: [0.6, 0.8]
+        })
+      ]
+    });
+    console.log(files);
   }
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
-
   return (
     <>
       <UploadBox handleChange={(tasks)=>handleChange(tasks)}/>
       <div className="task-list">
         <Tasks tasks={tasks}/>
-        {!data ? "Loading..." : data}
       </div>
       <DownloadAll/>
     </>
   );
-
 }
 export default App;
