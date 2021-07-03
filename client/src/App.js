@@ -4,26 +4,40 @@ import Tasks from './components/Tasks';
 import DownloadAll from './components/DownloadAll';
 import { useState } from "react";
 
-import imagemin from 'imagemin';
-import imageminJpegtran from 'imagemin-jpegtran';
-import imageminPngquant from 'imagemin-pngquant';
-
-
 import './App.scss'
 function App() {
   const [tasks,setTasks] = useState([])
   const handleChange = async (tasks)=>{
-      setTasks(tasks); 
-    const files = await imagemin(['images/*.{jpg,png}'], {
-        destination: 'build/images',
-      plugins: [
-        imageminJpegtran(),
-        imageminPngquant({
-          quality: [0.6, 0.8]
-        })
-      ]
-    });
-    console.log(files);
+      // setTasks(tasks);
+      
+      
+      const result = await fetch("/api")
+      
+      console.log(`response recived ${result}`)
+
+
+      // fetch("/api")
+      // .then(res => res.json())
+      // .then(
+      //   (result) => {
+      //     this.setState({
+      //       isLoaded: true,
+      //       items: result.items
+      //     });
+      //   },
+      //   // Note: it's important to handle errors here
+      //   // instead of a catch() block so that we don't swallow
+      //   // exceptions from actual bugs in components.
+      //   (error) => {
+      //     this.setState({
+      //       isLoaded: true,
+      //       error
+      //     });
+      //   }
+      // )
+
+
+
   }
   return (
     <>
