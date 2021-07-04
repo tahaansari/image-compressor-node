@@ -8,36 +8,11 @@ import './App.scss'
 function App() {
   const [tasks,setTasks] = useState([])
   const handleChange = async (tasks)=>{
-      // setTasks(tasks);
-      
-      
-      const result = await fetch("/api")
-      
-      console.log(`response recived ${result}`)
-
-
-      // fetch("/api")
-      // .then(res => res.json())
-      // .then(
-      //   (result) => {
-      //     this.setState({
-      //       isLoaded: true,
-      //       items: result.items
-      //     });
-      //   },
-      //   // Note: it's important to handle errors here
-      //   // instead of a catch() block so that we don't swallow
-      //   // exceptions from actual bugs in components.
-      //   (error) => {
-      //     this.setState({
-      //       isLoaded: true,
-      //       error
-      //     });
-      //   }
-      // )
-
-
-
+      console.log(tasks)
+      setTasks(tasks);
+      // const res = await fetch("/api")
+      // const data = await res.json();
+      // console.log(`response recived ${JSON.stringify(data)}`)
   }
   return (
     <>
